@@ -1,6 +1,6 @@
 // import { gzipSync } from 'node:zlib';
 import { gzip } from "npm:pako@^2.1.0";
-import { encodeBase64 } from "jsr:@std/encoding/base64";
+import { encodeBase64 } from "jsr:@std/encoding@^0.224.0/base64";
 import { Danmaku } from "../types.ts";
 
 export default (list: Danmaku[], config: any, context: any) => {
