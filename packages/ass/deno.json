@@ -1,0 +1,45 @@
+{
+  "name": "@biliy-deno/danmaku2ass",
+  "version": "0.1.0",
+  "description": "Convert bilibili danmaku to ass subtitle",
+  "author": "xrz-cloud",
+  "exports": "./src/index.ts",
+  "importMap": "vendor/import_map.json",
+  "keywords": [
+    "danmaku",
+    "bilibili",
+    "ass"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:bili-vd-bak/biliy-deno.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/bili-vd-bak/biliy-deno",
+  "lint": {
+    "include": [
+      "src/"
+    ],
+    "rules": {
+      "tags": [
+        "recommended"
+      ],
+      "include": [
+        "ban-untagged-todo"
+      ],
+      "exclude": [
+        "no-unused-vars",
+        "no-explicit-any"
+      ]
+    }
+  },
+  "fmt": {
+    "useTabs": true,
+    "indentWidth": 2,
+    "semiColons": true,
+    "proseWrap": "preserve",
+    "include": [
+      "src/"
+    ]
+  }
+}

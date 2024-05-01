@@ -1,23 +1,25 @@
-# @biliy/ass
+# @biliy-deno/danmaku2ass
 
-> forked from https://github.com/otakustay/danmaku-to-ass
+> forked from <https://github.com/otakustay/danmaku-to-ass>
+> forked from <https://github.com/justorez/biliy>
+
+Fix to use with Deno.  
+使用bilibili弹幕(XMl)生成ASS字幕文件。  
 
 ## Installation
 
-```bash
-pnpm add @biliy/ass
-```
+Find more detalis [here(jsr.io)](https://jsr.io/@biliy-deno/danmaku2ass).
 
 ## Quick Example
 
 ```js
-import fs from 'fs'
-import { generateASS } from '@biliy/ass'
+import fs from "fs";
+import { generateASS } from "jsr:@biliy-deno/danmaku2ass";
 
-const filename = 'example.xml'
-const xmlText = fs.readFileSync(filename, 'utf-8')
-const assText = generateASS(xmlText, { filename, title: 'Quick Example' })
-fs.writeFileSync(`${filename}.ass`, assText, 'utf-8')
+const filename = "example.xml";
+const xmlText = fs.readFileSync(filename, "utf-8");
+const assText = generateASS(xmlText, { filename, title: "Quick Example" });
+fs.writeFileSync(`${filename}.ass`, assText, "utf-8");
 ```
 
 ```js
@@ -45,6 +47,6 @@ fs.writeFileSync(`${filename}.ass`, assText, 'utf-8')
 }
 ```
 
-## FAQ
+## LICENSE
 
-If you get errors about node-canvas when install, please check [node-canvas docs](https://github.com/Automattic/node-canvas#installation).
+MIT

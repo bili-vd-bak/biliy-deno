@@ -1,11 +1,11 @@
 export {
-    hexColorToRGB,
-    decimalColorToRGB,
-    formatColor,
-    getDecoratingColor,
-    isWhite
-} from './color'
-export { layoutDanmaku } from './layout'
-export { filterDanmaku } from './filter'
-export { mergeDanmaku } from './merge'
-export { assign, uniqueArray, arrayOfLength } from './lang'
+	decimalColorToRGB,
+	formatColor,
+	getDecoratingColor,
+	hexColorToRGB,
+	isWhite,
+} from "./color.ts";
+export { layoutDanmaku } from "./layout.ts";
+export { filterDanmaku } from "./filter.ts";
+export { mergeDanmaku } from "./merge.ts";
+export { arrayOfLength, assign, uniqueArray } from "./lang.ts";

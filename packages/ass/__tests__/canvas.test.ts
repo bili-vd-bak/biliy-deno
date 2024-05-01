@@ -1,9 +1,12 @@
-import { measureTextWidth } from '../src/util/layout'
-import { it, assert, assertType } from 'vitest'
+import { measureTextWidth } from "../src/util/layout.ts";
+import { assert } from "jsr:@std/assert";
+import { assertType,IsExact } from 'jsr:@std/testing/types';
 
-it('canvas measureTextWidth', () => {
-    const text = '一段测试文字'
-    const width = measureTextWidth('SimHei', 25, false, text)
-    assertType<number>(width)
-    assert(width >= 25 * text.length)
-})
+Deno.test("canvas measureTextWidth", () => {
+  const text = "一段测试文字";
+  const width = measureTextWidth("SimHei", 25, false, text);
+  // assertType<number>(width);
+  assertType<IsExact<typeof width,number>>(true)
+  console.log(width , 25 * text.length)
+  assert(width >= 25 * text.length);
+});

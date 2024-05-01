@@ -1,6 +1,6 @@
-import parseXML from 'xml-parser'
-import { Danmaku, DanmakuType, FontSize } from '../types'
-import { decimalColorToRGB } from '../util'
+import parseXML from "npm:xml-parser@^1.2.1";
+import { Danmaku, DanmakuType, FontSize } from "../types.ts";
+import { decimalColorToRGB } from "../util/index.ts";
 
 // Bilibili的弹幕XML结构如下：
 //
@@ -31,50 +31,49 @@ import { decimalColorToRGB } from '../util'
 // 转换时只需要使用前4项即可
 
 const DANMAKU_TYPE_MAPPING = {
-    1: DanmakuType.SCROLL,
-    2: DanmakuType.SCROLL,
-    3: DanmakuType.SCROLL,
-    4: DanmakuType.TOP,
-    5: DanmakuType.BOTTOM
-}
+	1: DanmakuType.SCROLL,
+	2: DanmakuType.SCROLL,
+	3: DanmakuType.SCROLL,
+	4: DanmakuType.TOP,
+	5: DanmakuType.BOTTOM,
+};
 
 const FONT_SIZE_MAPPING = {
-    18: FontSize.SMALL,
-    25: FontSize.NORMAL
-}
+	18: FontSize.SMALL,
+	25: FontSize.NORMAL,
+};
 
 const nodeToDanmaku = (node: parseXML.Node) => {
-    const [time, type, fontSize, color] = node.attributes.p.split(',')
-    const danmaku = {
-        time: parseFloat(time),
-        type: DANMAKU_TYPE_MAPPING[type],
-        fontSizeType:
-            fontSize in FONT_SIZE_MAPPING
-                ? FONT_SIZE_MAPPING[fontSize]
-                : FontSize.NORMAL,
-        color: decimalColorToRGB(Number(color)),
-        content: node.content
-    }
+	const [time, type, fontSize, color] = node.attributes.p.split(",");
+	const danmaku = {
+		time: parseFloat(time),
+		type: DANMAKU_TYPE_MAPPING[type as unknown as 1 | 2 | 3 | 4 | 5],
+		fontSizeType: fontSize in FONT_SIZE_MAPPING
+			? FONT_SIZE_MAPPING[fontSize as unknown as 18 | 25]
+			: FontSize.NORMAL,
+		color: decimalColorToRGB(Number(color)),
+		content: node.content,
+	};
 
-    if (!danmaku.content) {
-        console.warn(`[Warn] Dropped empty danmaku at ${danmaku.time}`)
-        return
-    }
+	if (!danmaku.content) {
+		console.warn(`[Warn] Dropped empty danmaku at ${danmaku.time}`);
+		return;
+	}
 
-    if (danmaku.type) {
-        return danmaku
-    }
+	if (danmaku.type) {
+		return danmaku;
+	}
 
-    console.warn(
-        `[Warn] Dropped unsupported ${danmaku.time}: ${danmaku.content}`
-    )
-}
+	console.warn(
+		`[Warn] Dropped unsupported ${danmaku.time}: ${danmaku.content}`,
+	);
+};
 
 export default function parse(text: string) {
-    const xml = parseXML(text)
-    const comments = xml.root.children
-        .filter((node) => node.name === 'd')
-        .map((node) => nodeToDanmaku(node))
-        .filter((dm) => dm)
-    return { list: comments } as { list: Danmaku[] }
+	const xml = parseXML(text);
+	const comments = xml.root.children
+		.filter((node: any) => node.name === "d")
+		.map((node: any) => nodeToDanmaku(node))
+		.filter((dm: any) => dm);
+	return { list: comments } as { list: Danmaku[] };
 }
